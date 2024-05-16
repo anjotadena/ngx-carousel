@@ -6,7 +6,7 @@
   [style.height]="!maintainAspectRatio ? '100%' : 'auto'"
 >
   <ul
-    #imageSlider
+    #imageSliderList
     class="image-slider-list"
     role="listbox"
     [attr.aria-label]="ariaLabel"
@@ -14,16 +14,16 @@
     [style.height]="!maintainAspectRatio ? '100%' : 'auto'"
   >
     <li
-      #imageSliderItem
+      #imageSliderSlide
       *ngFor="let slide of slidesList"
-      class="image-slider-item"
+      class="image-slider-slide"
       role="option"
       [style.padding-bottom]="maintainAspectRatio && proportion ? proportion + '%': '0px'"
       [style.height]="!maintainAspectRatio && slideHeight ? slideHeight : '0px'"
-      (panleft)="onPan($event, imageSliderItem)"
-      (panright)="onPan($event, imageSliderItem)"
-      (panend)="onPanEnd($event, imageSliderItem)"
-      (pancancel)="onPanEnd($event, imageSliderItem)"
+      (panleft)="onPan($event, imageSliderSlide)"
+      (panright)="onPan($event, imageSliderSlide)"
+      (panend)="onPanEnd($event, imageSliderSlide)"
+      (pancancel)="onPanEnd($event, imageSliderSlide)"
     >
       <ng-container *ngIf="slide.load" [ngTemplateOutlet]="slide.templateRef"></ng-container>
     </li>

@@ -16,7 +16,7 @@ import {
   PLATFORM_ID,
   QueryList,
   Renderer2,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { interval, BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -28,17 +28,16 @@ import { NgxImageSliderItemComponent } from './image-slider-item/image-slider-it
 enum Direction {
   left,
   right,
-  index,
+  index
 }
 
 @Component({
   selector: 'ngx-image-slider',
   templateUrl: './image-slider.component.html',
-  styleUrls: ['./image-slider.component.scss'],
+  styleUrls: ['./image-slider.component.scss']
 })
 export class NgxImageSliderComponent
-  implements AfterContentInit, AfterViewInit, NgxImageSlider, OnDestroy
-{
+  implements AfterContentInit, AfterViewInit, NgxImageSlider, OnDestroy {
   @Input() public timings = '250ms ease-in';
   @Input() public lazyLoad = false;
   @Input() public svgIconOverrides: SvgIconOverrides;
@@ -65,7 +64,7 @@ export class NgxImageSliderComponent
 
   @Input() public hideArrows = true;
   @Input() public hideIndicators = true;
-  @Input() public ariaLabel = 'Sliding image';
+  @Input() public ariaLabel = 'Sliding carousel';
   @Input() public color: ThemePalette = 'accent';
 
   public get maxWidth(): string {
@@ -116,11 +115,13 @@ export class NgxImageSliderComponent
     return null;
   }
 
-  @ContentChildren(NgxImageSliderItemComponent)
-  public slidesList: QueryList<NgxImageSliderItemComponent>;
-  @ViewChild('imageSliderContainer')
-  private imageSliderContainer: ElementRef<HTMLDivElement>;
-  @ViewChild('imageSlider') private imageSlider: ElementRef<HTMLElement>;
+  @ContentChildren(NgxImageSliderItemComponent) public slidesList: QueryList<
+    NgxImageSliderItemComponent
+  >;
+  @ViewChild('imageSliderContainer') private imageSliderContainer: ElementRef<
+    HTMLDivElement
+  >;
+  @ViewChild('imageSliderList') private imageSliderList: ElementRef<HTMLElement>;
   public listKeyManager: ListKeyManager<NgxImageSliderItemComponent>;
 
   private _autoplay = true;
@@ -185,7 +186,7 @@ export class NgxImageSliderComponent
 
   @HostListener('window:resize', ['$event'])
   public onResize(event: Event): void {
-    // Reset image slider when width is resized
+    // Reset carousel when width is resized
     // in order to avoid major glitches.
     const w = this.getWidth();
     if (w !== this.width) {
@@ -196,15 +197,12 @@ export class NgxImageSliderComponent
 
   public ngAfterContentInit(): void {
     if (!this.lazyLoad) {
-      this.slidesList.forEach((slide) => (slide.load = true));
+      this.slidesList.forEach( (slide) => slide.load = true );
     } else {
       this.slidesList.first.load = true;
-      setTimeout(() => {
-        this.slidesList.find((s, i) => i === 1 % this.slidesList.length).load =
-          true;
-        this.slidesList.find(
-          (s, i) => i === (this.slidesList.length - 1) % this.slidesList.length
-        ).load = true;
+      setTimeout( () => {
+        this.slidesList.find( (s, i) => i === 1 % this.slidesList.length).load = true;
+        this.slidesList.find( (s, i) => i === (this.slidesList.length - 1) % this.slidesList.length).load = true;
       }, this.interval$.getValue() / 2);
     }
 
@@ -223,12 +221,12 @@ export class NgxImageSliderComponent
   public ngAfterViewInit(): void {
     this.width = this.getWidth();
 
-    this.autoplay$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+    this.autoplay$.pipe(takeUntil(this.destroy$)).subscribe(value => {
       this.stopTimer();
       this.startTimer(value);
     });
 
-    this.interval$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+    this.interval$.pipe(takeUntil(this.destroy$)).subscribe(value => {
       this.stopTimer();
       this.resetTimer(value);
       this.startTimer(this._autoplay);
@@ -240,20 +238,18 @@ export class NgxImageSliderComponent
 
     this.loop$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => this.listKeyManager.withWrap(value));
+      .subscribe(value => this.listKeyManager.withWrap(value));
 
     this.orientation$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((value) =>
-        this.listKeyManager.withHorizontalOrientation(value)
-      );
+      .subscribe(value => this.listKeyManager.withHorizontalOrientation(value));
 
     this.slides$
       .pipe(
         takeUntil(this.destroy$),
-        filter((value) => value && value < this.slidesList.length)
+        filter(value => value && value < this.slidesList.length)
       )
-      .subscribe((value) => this.resetSlides(value));
+      .subscribe(value => this.resetSlides(value));
   }
 
   public ngOnDestroy(): void {
@@ -286,7 +282,7 @@ export class NgxImageSliderComponent
 
     this.renderer.setStyle(slideElem, 'cursor', 'grabbing');
     this.renderer.setStyle(
-      this.imageSlider.nativeElement,
+      this.imageSliderList.nativeElement,
       'transform',
       this.getTranslation(this.getOffset() + deltaX)
     );
@@ -313,8 +309,8 @@ export class NgxImageSliderComponent
     const sign = this.orientation === 'rtl' ? -1 : 1;
     const left =
       sign *
-      (this.imageSlider.nativeElement.getBoundingClientRect().left -
-        this.imageSlider.nativeElement.offsetParent.getBoundingClientRect()
+      (this.imageSliderList.nativeElement.getBoundingClientRect().left -
+        this.imageSliderList.nativeElement.offsetParent.getBoundingClientRect()
           .left);
     const lastIndex = this.slidesList.length - 1;
     const width = -this.getWidth() * lastIndex;
@@ -378,7 +374,7 @@ export class NgxImageSliderComponent
     const factory = this.animationBuilder.build(
       animate(this.timings, style({ transform: translation }))
     );
-    const animation = factory.create(this.imageSlider.nativeElement);
+    const animation = factory.create(this.imageSliderList.nativeElement);
 
     animation.onStart(() => {
       this.playing = true;
@@ -387,19 +383,12 @@ export class NgxImageSliderComponent
       this.changeEmitter.emit(this.currentIndex);
       this.playing = false;
       if (this.lazyLoad) {
-        this.slidesList.find(
-          (s, i) => i === (this.currentIndex + 1) % this.slidesList.length
-        ).load = true;
-        this.slidesList.find(
-          (s, i) =>
-            i ===
-            (this.currentIndex - 1 + this.slidesList.length) %
-              this.slidesList.length
-        ).load = true;
-        this.slidesList.find((s, i) => i === this.currentIndex).load = true;
+        this.slidesList.find( (s, i) => i === (this.currentIndex + 1) % this.slidesList.length).load = true;
+        this.slidesList.find( (s, i) => i === (this.currentIndex - 1 + this.slidesList.length)  % this.slidesList.length).load = true;
+        this.slidesList.find( (s, i) => i === this.currentIndex).load = true;
       }
       this.renderer.setStyle(
-        this.imageSlider.nativeElement,
+        this.imageSliderList.nativeElement,
         'transform',
         translation
       );
