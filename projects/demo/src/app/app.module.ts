@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgxMatCarouselModule } from 'ngx-image-slider';
+import { NgxImageSliderModule } from 'ngx-image-slider';
 
 import { AppComponent } from './app.component';
 
@@ -26,7 +26,7 @@ import { AppComponent } from './app.component';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
-    NgxMatCarouselModule.forRoot(),
+    NgxImageSliderModule.forRoot(),
     MatExpansionModule,
     MatIconModule,
     MatInputModule,

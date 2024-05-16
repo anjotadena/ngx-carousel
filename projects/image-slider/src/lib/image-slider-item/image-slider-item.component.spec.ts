@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxMatCarouselSlideComponent } from './carousel-slide.component';
+import { NgxImageSliderItemComponent } from './image-slider-item.component';
 
-describe('NgxMatCarouselSlideComponent', () => {
-  let component: NgxMatCarouselSlideComponent;
-  let fixture: ComponentFixture<NgxMatCarouselSlideComponent>;
+describe('NgxImageSliderItemComponent', () => {
+  let component: NgxImageSliderItemComponent;
+  let fixture: ComponentFixture<NgxImageSliderItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgxMatCarouselSlideComponent ]
+      declarations: [ NgxImageSliderItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgxMatCarouselSlideComponent);
+    fixture = TestBed.createComponent(NgxImageSliderItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

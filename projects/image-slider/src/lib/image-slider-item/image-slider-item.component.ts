@@ -8,15 +8,15 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
-import { NgxMatCarouselSlide } from './carousel-slide';
+import { NgxImageSliderItem } from './image-slider-item';
 
 @Component({
-  selector: 'mat-carousel-slide',
-  templateUrl: './carousel-slide.component.html',
-  styleUrls: ['./carousel-slide.component.scss']
+  selector: 'ngx-image-slider-item',
+  templateUrl: './image-slider-item.component.html',
+  styleUrls: ['./image-slider-item.component.scss']
 })
-export class NgxMatCarouselSlideComponent
-  implements ListKeyManagerOption, NgxMatCarouselSlide, OnInit {
+export class NgxImageSliderItemComponent
+  implements ListKeyManagerOption, NgxImageSliderItem, OnInit {
   @Input() public image: SafeStyle;
   @Input() public overlayColor = '#00000040';
   @Input() public hideOverlay = false;

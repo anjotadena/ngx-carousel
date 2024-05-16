@@ -4,35 +4,35 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { NgxMatCarouselComponent } from './carousel.component';
-import { NgxMatCarouselModule } from './carousel.module';
+import { NgxImageSliderComponent } from './image-slider.component';
+import { NgxImageSliderModule } from './image-slider.module';
 
 @Component({
-  selector: 'mat-carousel-test-wrapper-component',
-  template: '<mat-carousel [autoplay]="false"><mat-carousel-slide *ngFor="let slide of slides"></mat-carousel-slide></mat-carousel>'
+  selector: 'ngx-image-slider-test-wrapper-component',
+  template: '<ngx-image-slider [autoplay]="false"><ngx-image-slider-item *ngFor="let slide of slides"></ngx-image-slider-item></ngx-image-slider>'
 })
-class NgxMatCarouselTestWrapperComponent {
+class NgxImageSliderTestWrapperComponent {
   public slides = new Array<never>(5);
 }
 
-describe('NgxMatCarouselComponent', () => {
-  let component: NgxMatCarouselComponent;
-  let fixture: ComponentFixture<NgxMatCarouselTestWrapperComponent>;
+describe('NgxImageSliderComponent', () => {
+  let component: NgxImageSliderComponent;
+  let fixture: ComponentFixture<NgxImageSliderTestWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NgxMatCarouselTestWrapperComponent],
+      declarations: [NgxImageSliderTestWrapperComponent],
       imports: [
         NoopAnimationsModule,
         MatButtonModule,
         MatIconModule,
-        NgxMatCarouselModule
+        NgxImageSliderModule
       ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgxMatCarouselTestWrapperComponent);
+    fixture = TestBed.createComponent(NgxImageSliderTestWrapperComponent);
     component = fixture.debugElement.children[0].componentInstance;
 
     fixture.detectChanges();

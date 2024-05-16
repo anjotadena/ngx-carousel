@@ -1,0 +1,11 @@
+<ng-template>
+  <div class="image-slider-item" [style.background-image]="image">
+    <div class="image-slider-item-content"><ng-content></ng-content></div>
+    <div
+      *ngIf="!hideOverlay"
+      class="image-slider-item-overlay"
+      [attr.aria-label] = "ariaLabel"
+      [style.background-color]="overlayColor"
+    ></div>
+  </div>
+</ng-template>

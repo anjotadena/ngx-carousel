@@ -14,8 +14,8 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "ngx-image-slider": ["dist/carousel"],
-      "ngx-image-slider/*": ["dist/carousel/*"]
+      "ngx-image-slider": ["dist/image-slider"],
+      "ngx-image-slider/*": ["dist/image-slider/*"]
     },
     "plugins": [
       { "name": "@angular/language-service" },

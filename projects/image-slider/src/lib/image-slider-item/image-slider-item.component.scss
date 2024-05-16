@@ -1,6 +1,6 @@
 @import "mixins";
 
-.carousel-slide {
+.image-slider-item {
   @include frame();
   background-size: cover;
   background-repeat: no-repeat;

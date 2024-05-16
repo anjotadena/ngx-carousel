@@ -1,21 +1,22 @@
 {
   "name": "ngx-image-slider",
-  "description": "Carousel component for Angular using Material Design.",
+  "description": "Image slider component for Angular using Material Design.",
   "version": "0.0.0-beta.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/anjotadena/ngx-mat-carousel.git"
+    "url": "https://github.com/anjotadena/ngx-image-slider.git"
   },
   "author": "anjotadena",
   "license": "MIT",
-  "homepage": "https://github.com/anjotadena/ngx-mat-carousel",
-  "bugs": "https://github.com/anjotadena/ngx-mat-carousel/issues",
+  "homepage": "https://github.com/anjotadena/ngx-image-slider",
+  "bugs": "https://github.com/anjotadena/ngx-image-slider/issues",
   "keywords": [
     "angular",
     "material",
-    "carousel",
+    "image-slider",
     "component",
-    "module"
+    "module",
+    "carousel"
   ],
   "publishConfig": {
     "access": "public"

@@ -23,7 +23,7 @@
     </button>
     <mat-menu #demoMenu="matMenu">
       <a
-        href="https://github.com/anjotadena/ngx-mat-carousel"
+        href="https://github.com/anjotadena/ngx-image-slider"
         target="_blank"
         mat-menu-item
       >
@@ -59,7 +59,7 @@
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title> Carousel configuration </mat-panel-title>
+            <mat-panel-title> Image Slider configuration </mat-panel-title>
           </mat-expansion-panel-header>
 
           <section class="demo-section">
@@ -166,7 +166,7 @@
               <mat-select
                 placeholder="Orientation"
                 [(value)]="orientation"
-                (selectionChange)="NgxMatCarousel.slideTo(0)"
+                (selectionChange)="NgxImageSlider.slideTo(0)"
               >
                 <mat-option value="ltr">Left to right</mat-option>
                 <mat-option value="rtl">Right to left</mat-option>
@@ -202,10 +202,12 @@
           </section>
         </mat-expansion-panel>
       </mat-accordion>
-
+      <div>
+        {{ slidesList | json }}
+      </div>
       <div class="demo-carousel" [style.height]="parentHeight">
-        <mat-carousel
-          #NgxMatCarousel
+        <ngx-image-slider
+          #NgxImageSlider
           [timings]="timings"
           [autoplay]="autoplay"
           [interval]="interval"
@@ -224,8 +226,8 @@
           [slideHeight]="slideHeight"
           (change)="onChange($event)"
         >
-          <mat-carousel-slide
-            #NgxMatCarouselSlide
+          <ngx-image-slider-item
+            #NgxImageSliderItem
             *ngFor="let slide of slidesList; let i = index"
             image="assets/demo.png?{{i}}"
             [overlayColor]="overlayColor"
@@ -236,19 +238,19 @@
                 style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center"
               >
                 <h1>{{ i }}</h1>
-                <p>disabled: {{ NgxMatCarouselSlide.disabled }}</p>
+                <p>disabled: {{ NgxImageSliderItem.disabled }}</p>
                 <button
                   mat-flat-button
                   (click)="
-                    NgxMatCarouselSlide.disabled = !NgxMatCarouselSlide.disabled
+                    NgxImageSliderItem.disabled = !NgxImageSliderItem.disabled
                   "
                 >
                   Click me!
                 </button>
               </div>
             </ng-container>
-          </mat-carousel-slide>
-        </mat-carousel>
+          </ngx-image-slider-item>
+        </ngx-image-slider>
       </div>
 
       <mat-expansion-panel>

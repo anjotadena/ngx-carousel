@@ -2,22 +2,18 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  NgxMatCarouselSlideComponent,
-  Orientation
-} from 'ngx-image-slider';
+import { NgxImageSliderItemComponent, Orientation } from 'ngx-image-slider';
 
 @Component({
   selector: 'mat-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   private static readonly installText = 'npm install ngx-image-slider';
 
-  @ViewChildren(NgxMatCarouselSlideComponent) public carouselSlides: QueryList<
-    NgxMatCarouselSlideComponent
-  >;
+  @ViewChildren(NgxImageSliderItemComponent)
+  public carouselSlides: QueryList<NgxImageSliderItemComponent>;
 
   public slidesList = new Array<never>(5);
   public showContent = false;
@@ -44,7 +40,7 @@ export class AppComponent {
   public get code(): string {
     return `
 <div [style.height]="${this.parentHeight}">
-  <mat-carousel
+  <ngx-image-slider
     timings="${this.timings}"
     [autoplay]="${this.autoplay}"
     interval="${this.interval}"
@@ -59,14 +55,14 @@ export class AppComponent {
     [useMouseWheel]="${this.useMouseWheel}"
     orientation="${this.orientation}"
   >
-    <mat-carousel-slide
-      #NgxMatCarouselSlide
+    <ngx-image-slider-item
+      #NgxImageSliderItem
       *ngFor="let slide of slides; let i = index"
-      [image]="slide.image"
+      image="assets/demo.png?{{i}}"
       overlayColor="${this.overlayColor}"
       [hideOverlay]="${this.hideOverlay}"
-    >${this.showContent ? this.innerCode : ''}</mat-carousel-slide>
-  </mat-carousel>
+    >${this.showContent ? this.innerCode : ''}</ngx-image-slider-item>
+  </ngx-image-slider>
 </div>
     `;
   }
@@ -76,10 +72,10 @@ export class AppComponent {
       style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center"
     >
       <h1>{{ i }}</h1>
-      <p>disabled: {{ NgxMatCarouselSlide.disabled }}</p>
+      <p>disabled: {{ NgxImageSliderItem.disabled }}</p>
       <button
         mat-flat-button
-        (click)="NgxMatCarouselSlide.disabled = !NgxMatCarouselSlide.disabled"
+        (click)="NgxImageSliderItem.disabled = !NgxImageSliderItem.disabled"
       >
         Click me!
       </button>
@@ -97,7 +93,7 @@ export class AppComponent {
 
     const elems = [
       this.elementRef.nativeElement,
-      this.overlayContainer.getContainerElement()
+      this.overlayContainer.getContainerElement(),
     ];
 
     for (const elem of elems) {
@@ -123,15 +119,15 @@ export class AppComponent {
     document.body.removeChild(textarea);
 
     this.snackBar.open('Command was successfully copied to clipboard!', '', {
-      duration: 2000
+      duration: 2000,
     });
   }
 
   public resetSlides(): void {
-    this.carouselSlides.forEach(item => (item.disabled = false));
+    this.carouselSlides.forEach((item) => (item.disabled = false));
   }
 
   public onChange(index: number) {
-    this.log.push(`NgxMatCarousel#change emitted with index ${index}`);
+    this.log.push(`NgxImageSlider#change emitted with index ${index}`);
   }
 }

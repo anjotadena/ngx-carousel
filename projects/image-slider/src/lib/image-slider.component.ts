@@ -16,28 +16,29 @@ import {
   PLATFORM_ID,
   QueryList,
   Renderer2,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { interval, BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { NgxNgxMatCarousel, Orientation, SvgIconOverrides } from './carousel';
-import { NgxMatCarouselSlideComponent } from './carousel-slide/carousel-slide.component';
+import { NgxImageSlider, Orientation, SvgIconOverrides } from './image-slider';
+import { NgxImageSliderItemComponent } from './image-slider-item/image-slider-item.component';
 
 enum Direction {
   left,
   right,
-  index
+  index,
 }
 
 @Component({
-  selector: 'mat-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss']
+  selector: 'ngx-image-slider',
+  templateUrl: './image-slider.component.html',
+  styleUrls: ['./image-slider.component.scss'],
 })
-export class NgxMatCarouselComponent
-  implements AfterContentInit, AfterViewInit, NgxNgxMatCarousel, OnDestroy {
+export class NgxImageSliderComponent
+  implements AfterContentInit, AfterViewInit, NgxImageSlider, OnDestroy
+{
   @Input() public timings = '250ms ease-in';
   @Input() public lazyLoad = false;
   @Input() public svgIconOverrides: SvgIconOverrides;
@@ -64,7 +65,7 @@ export class NgxMatCarouselComponent
 
   @Input() public hideArrows = true;
   @Input() public hideIndicators = true;
-  @Input() public ariaLabel = 'Sliding carousel';
+  @Input() public ariaLabel = 'Sliding image';
   @Input() public color: ThemePalette = 'accent';
 
   public get maxWidth(): string {
@@ -107,7 +108,7 @@ export class NgxMatCarouselComponent
 
     return 0;
   }
-  public get currentSlide(): NgxMatCarouselSlideComponent {
+  public get currentSlide(): NgxImageSliderItemComponent {
     if (this.listKeyManager) {
       return this.listKeyManager.activeItem;
     }
@@ -115,14 +116,12 @@ export class NgxMatCarouselComponent
     return null;
   }
 
-  @ContentChildren(NgxMatCarouselSlideComponent) public slidesList: QueryList<
-    NgxMatCarouselSlideComponent
-  >;
-  @ViewChild('carouselContainer') private carouselContainer: ElementRef<
-    HTMLDivElement
-  >;
-  @ViewChild('carouselList') private carouselList: ElementRef<HTMLElement>;
-  public listKeyManager: ListKeyManager<NgxMatCarouselSlideComponent>;
+  @ContentChildren(NgxImageSliderItemComponent)
+  public slidesList: QueryList<NgxImageSliderItemComponent>;
+  @ViewChild('imageSliderContainer')
+  private imageSliderContainer: ElementRef<HTMLDivElement>;
+  @ViewChild('imageSlider') private imageSlider: ElementRef<HTMLElement>;
+  public listKeyManager: ListKeyManager<NgxImageSliderItemComponent>;
 
   private _autoplay = true;
   private autoplay$ = new Subject<boolean>();
@@ -186,7 +185,7 @@ export class NgxMatCarouselComponent
 
   @HostListener('window:resize', ['$event'])
   public onResize(event: Event): void {
-    // Reset carousel when width is resized
+    // Reset image slider when width is resized
     // in order to avoid major glitches.
     const w = this.getWidth();
     if (w !== this.width) {
@@ -197,12 +196,15 @@ export class NgxMatCarouselComponent
 
   public ngAfterContentInit(): void {
     if (!this.lazyLoad) {
-      this.slidesList.forEach( (slide) => slide.load = true );
+      this.slidesList.forEach((slide) => (slide.load = true));
     } else {
       this.slidesList.first.load = true;
-      setTimeout( () => {
-        this.slidesList.find( (s, i) => i === 1 % this.slidesList.length).load = true;
-        this.slidesList.find( (s, i) => i === (this.slidesList.length - 1) % this.slidesList.length).load = true;
+      setTimeout(() => {
+        this.slidesList.find((s, i) => i === 1 % this.slidesList.length).load =
+          true;
+        this.slidesList.find(
+          (s, i) => i === (this.slidesList.length - 1) % this.slidesList.length
+        ).load = true;
       }, this.interval$.getValue() / 2);
     }
 
@@ -221,12 +223,12 @@ export class NgxMatCarouselComponent
   public ngAfterViewInit(): void {
     this.width = this.getWidth();
 
-    this.autoplay$.pipe(takeUntil(this.destroy$)).subscribe(value => {
+    this.autoplay$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
       this.stopTimer();
       this.startTimer(value);
     });
 
-    this.interval$.pipe(takeUntil(this.destroy$)).subscribe(value => {
+    this.interval$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
       this.stopTimer();
       this.resetTimer(value);
       this.startTimer(this._autoplay);
@@ -238,18 +240,20 @@ export class NgxMatCarouselComponent
 
     this.loop$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => this.listKeyManager.withWrap(value));
+      .subscribe((value) => this.listKeyManager.withWrap(value));
 
     this.orientation$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => this.listKeyManager.withHorizontalOrientation(value));
+      .subscribe((value) =>
+        this.listKeyManager.withHorizontalOrientation(value)
+      );
 
     this.slides$
       .pipe(
         takeUntil(this.destroy$),
-        filter(value => value && value < this.slidesList.length)
+        filter((value) => value && value < this.slidesList.length)
       )
-      .subscribe(value => this.resetSlides(value));
+      .subscribe((value) => this.resetSlides(value));
   }
 
   public ngOnDestroy(): void {
@@ -282,7 +286,7 @@ export class NgxMatCarouselComponent
 
     this.renderer.setStyle(slideElem, 'cursor', 'grabbing');
     this.renderer.setStyle(
-      this.carouselList.nativeElement,
+      this.imageSlider.nativeElement,
       'transform',
       this.getTranslation(this.getOffset() + deltaX)
     );
@@ -309,8 +313,8 @@ export class NgxMatCarouselComponent
     const sign = this.orientation === 'rtl' ? -1 : 1;
     const left =
       sign *
-      (this.carouselList.nativeElement.getBoundingClientRect().left -
-        this.carouselList.nativeElement.offsetParent.getBoundingClientRect()
+      (this.imageSlider.nativeElement.getBoundingClientRect().left -
+        this.imageSlider.nativeElement.offsetParent.getBoundingClientRect()
           .left);
     const lastIndex = this.slidesList.length - 1;
     const width = -this.getWidth() * lastIndex;
@@ -326,7 +330,7 @@ export class NgxMatCarouselComponent
       return false;
     }
 
-    const elem = this.carouselContainer.nativeElement;
+    const elem = this.imageSliderContainer.nativeElement;
     const docViewTop = window.pageYOffset;
     const docViewBottom = docViewTop + window.innerHeight;
     const elemOffset = elem.getBoundingClientRect();
@@ -347,7 +351,7 @@ export class NgxMatCarouselComponent
   }
 
   private getWidth(): number {
-    return this.carouselContainer.nativeElement.clientWidth;
+    return this.imageSliderContainer.nativeElement.clientWidth;
   }
 
   private goto(direction: Direction, index?: number): void {
@@ -374,7 +378,7 @@ export class NgxMatCarouselComponent
     const factory = this.animationBuilder.build(
       animate(this.timings, style({ transform: translation }))
     );
-    const animation = factory.create(this.carouselList.nativeElement);
+    const animation = factory.create(this.imageSlider.nativeElement);
 
     animation.onStart(() => {
       this.playing = true;
@@ -383,12 +387,19 @@ export class NgxMatCarouselComponent
       this.changeEmitter.emit(this.currentIndex);
       this.playing = false;
       if (this.lazyLoad) {
-        this.slidesList.find( (s, i) => i === (this.currentIndex + 1) % this.slidesList.length).load = true;
-        this.slidesList.find( (s, i) => i === (this.currentIndex - 1 + this.slidesList.length)  % this.slidesList.length).load = true;
-        this.slidesList.find( (s, i) => i === this.currentIndex).load = true;
+        this.slidesList.find(
+          (s, i) => i === (this.currentIndex + 1) % this.slidesList.length
+        ).load = true;
+        this.slidesList.find(
+          (s, i) =>
+            i ===
+            (this.currentIndex - 1 + this.slidesList.length) %
+              this.slidesList.length
+        ).load = true;
+        this.slidesList.find((s, i) => i === this.currentIndex).load = true;
       }
       this.renderer.setStyle(
-        this.carouselList.nativeElement,
+        this.imageSlider.nativeElement,
         'transform',
         translation
       );

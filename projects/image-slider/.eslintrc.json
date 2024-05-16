@@ -10,8 +10,8 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/carousel/tsconfig.lib.json",
-          "projects/carousel/tsconfig.spec.json"
+          "projects/image-slider/tsconfig.lib.json",
+          "projects/image-slider/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },

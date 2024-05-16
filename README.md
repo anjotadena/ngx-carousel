@@ -1,11 +1,11 @@
-# Material Carousel
-![build](https://github.com/anjotadena/ngx-mat-carousel/workflows/Tests/badge.svg?branch=master&event=push)
-[![npm version](https://badge.fury.io/js/ngx-mat-carousel.svg)](https://badge.fury.io/js/ngx-mat-carousel)
-[![Live demo](https://img.shields.io/badge/demo-blue.svg)](https://anjotadena.github.io/ngx-mat-carousel/)
+# Material Image Slider
+![build](https://github.com/anjotadena/ngx-image-slider/workflows/Tests/badge.svg?branch=master&event=push)
+[![npm version](https://badge.fury.io/js/ngx-image-slider.svg)](https://badge.fury.io/js/ngx-image-slider)
+[![Live demo](https://img.shields.io/badge/demo-blue.svg)](https://anjotadena.github.io/ngx-image-slider/)
 
 
 ## About
-This is a carousel component for Angular using Material Design. See [live demo](https://anjotadena.github.io/ngx-mat-carousel/).
+This is a image-slider component for Angular using Material Design. See [live demo](https://anjotadena.github.io/ngx-image-slider/).
 
 ### History and current status
 
@@ -16,18 +16,18 @@ The current development goal is to keep the package secure and compatible with t
 PR's are welcomed; including bugfixes, upgrades and enhancements.
 
 ### Installing
-`npm install --save ngx-mat-carousel`
+`npm install --save ngx-image-slider`
 
 ### Importing
 ```typescript
 //...
-import { NgxMatCarouselModule } from 'ngx-mat-carousel';
+import { NgxImageSliderModule } from 'ngx-image-slider';
 
 @NgModule({
   // ...
   imports: [
     // ...
-    NgxMatCarouselModule.forRoot(),
+    NgxImageSliderModule.forRoot(),
     // ...
   ]
 })
@@ -35,14 +35,14 @@ export class AppModule {}
 ```
 
 ## Usage
-### `NgxMatCarouselComponent`
+### `NgxImageSliderComponent`
 ```typescript
-import { NgxMatCarousel, NgxMatCarouselComponent } from 'ngx-mat-carousel';
+import { NgxImageSlider, NgxImageSliderComponent } from 'ngx-image-slider';
 ```
 ```html
-<mat-carousel>
+<image-slider>
   ...
-</mat-carousel>
+</image-slider>
 ```
 #### Attributes
 | Input                 |  Type              | Description                                                                | Default value       |
@@ -62,39 +62,39 @@ import { NgxMatCarousel, NgxMatCarouselComponent } from 'ngx-mat-carousel';
 | `useKeyboard`         | `boolean`          | Enable keyboard navigation.                                                | `true`              |
 | `useMouseWheel`       | `boolean`          | Enable navigation through mouse wheeling.                                  | `false`             |
 | `orientation`         | `Orientation`      | Orientation of the sliding panel.                                          | `'ltr'`             |
-| `svgIconOverrides`    | `SvgIconOverrides` | Override default carousel icons with registered SVG icons.                 |                     |
-| `ariaLabel`           | `string`           | Carousel accessible name                                                   | `'Sliding carousel'`|
+| `svgIconOverrides`    | `SvgIconOverrides` | Override default image slidericons with registered SVG icons.              |                     |
+| `ariaLabel`           | `string`           | Image slider accessible name                                               | `'Sliding image slider'`|
 | `lazyLoad`            | `booelan`          | Lazy load content                                                          | false               |
 
 #### Size Considerations and Recommendations
 By default, `maintainAspectRatio` is true, which means height is controlled through `proportion`.
 
-If you want to have a carousel with constant height (regardless of width), you must set `maintainAspectRatio` to false.
+If you want to have a image-slider with constant height (regardless of width), you must set `maintainAspectRatio` to false.
 
 By default, `slideHeight` is set to `100%`, which will not work if the parent element height isn't defined (i.e. relative heights do not work if the parent height is `auto`). In that case you could pass a valid css string for `slideHeight`. You can use any valid css height string like `100px` or `25vh`.
 
-Play around with the [demo](https://anjotadena.github.io/ngx-mat-carousel) to see how you can use this carousel with or without explicit parent height.
+Play around with the [demo](https://anjotadena.github.io/ngx-image-slider) to see how you can use this image-slider with or without explicit parent height.
 
 **With parent elements that have height:auto**
-* use `proportion` if you want a carousel that resizes responsively (this is the default configuration).
-* use `maintainAspectRatio="false"` and a non-percentage `slideHeight` if you want a fixed height carousel.
-* **DO NOT** use relative (%) values for `slideHeight`; the carousel will not render.
+* use `proportion` if you want a image-slider that resizes responsively (this is the default configuration).
+* use `maintainAspectRatio="false"` and a non-percentage `slideHeight` if you want a fixed height image-slider.
+* **DO NOT** use relative (%) values for `slideHeight`; the image-slider will not render.
 
 **With parent elements that have a set height**
-* use `maintainAspectRatio="false"` if you want a fixed height carousel that fills the parent element (`slideHeight` is `100%` by default).
-* **DO NOT** use `maintainAspectRatio="false"` **and** `slideHeight` (unless `slideHeight="100%"`); the carousel will not render correctly because the buttons and indicators will be positioned with respect to the parent.
+* use `maintainAspectRatio="false"` if you want a fixed height image-slider that fills the parent element (`slideHeight` is `100%` by default).
+* **DO NOT** use `maintainAspectRatio="false"` **and** `slideHeight` (unless `slideHeight="100%"`); the image-slider will not render correctly because the buttons and indicators will be positioned with respect to the parent.
 * **DO NOT** use `proportion`; this will lead to gaps or unwanted overflow.
 
-### `NgxMatCarouselSlideComponent`
+### `NgxImageSliderComponent`
 ```typescript
-import { NgxMatCarouselSlide, NgxMatCarouselSlideComponent } from '@ngmodule/material-carousel';
+import { NgxImageSliderSlide, NgxImageSliderComponent } from '@ngmodule/material-image-slider';
 ```
 ```html
-<mat-carousel>
-  <mat-carousel-slide>
+<image-slider>
+  <ngx-image-slider>
     ...
-  </mat-carousel-slide>
-</mat-carousel>
+  </ngx-image-slider>
+</image-slider>
 ```
 #### Attributes
 | Input          | Type      | Description                   | Default value |
@@ -109,6 +109,6 @@ import { NgxMatCarouselSlide, NgxMatCarouselSlideComponent } from '@ngmodule/mat
 ## How to develop and test this component
 
 ### Testing
-`ng test carousel --watch false`
+`ng test image-slider --watch false`
 ### Running the demo application
 `ng serve demo`

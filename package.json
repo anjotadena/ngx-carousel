@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
-    "build": "ng build carousel && cp LICENSE dist/carousel && cp README.md dist/carousel",
-    "test": "ng test carousel --watch false",
+    "build": "ng build image-slider && cp LICENSE dist/image-slider && cp README.md dist/image-slider",
+    "test": "ng test image-slider --watch false",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ghpages": "ng build demo --configuration production --output-path docs --base-href \"https://anjotadena.github.io/ngx-mat-carousel/\""
+    "ghpages": "ng build demo --configuration production --output-path docs --base-href \"https://anjotadena.github.io/ngx-image-slider/\""
   },
   "private": false,
   "dependencies": {

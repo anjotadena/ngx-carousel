@@ -1,6 +1,6 @@
 import { ThemePalette } from '@angular/material/core';
 
-export interface NgxNgxMatCarousel {
+export interface NgxImageSlider {
   // Animations.
   timings: string;
   autoplay: boolean;

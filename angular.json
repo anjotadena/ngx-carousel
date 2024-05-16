@@ -3,9 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "carousel": {
-      "root": "projects/carousel",
-      "sourceRoot": "projects/carousel/src",
+    "image-slider": {
+      "root": "projects/image-slider",
+      "sourceRoot": "projects/image-slider/src",
       "projectType": "library",
       "prefix": "mat",
       "schematics": {
@@ -17,19 +17,19 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/carousel/tsconfig.lib.json",
-            "project": "projects/carousel/ng-package.json"
+            "tsConfig": "projects/image-slider/tsconfig.lib.json",
+            "project": "projects/image-slider/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/carousel/src/test.ts",
-            "tsConfig": "projects/carousel/tsconfig.spec.json",
-            "karmaConfig": "projects/carousel/karma.conf.js",
+            "main": "projects/image-slider/src/test.ts",
+            "tsConfig": "projects/image-slider/tsconfig.spec.json",
+            "karmaConfig": "projects/image-slider/karma.conf.js",
             "stylePreprocessorOptions": {
               "includePaths": [
-                "projects/carousel/src/styles"
+                "projects/image-slider/src/styles"
               ]
             }
           }
@@ -38,8 +38,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/carousel/**/*.ts",
-              "projects/carousel/**/*.html"
+              "projects/image-slider/**/*.ts",
+              "projects/image-slider/**/*.html"
             ]
           }
         }
