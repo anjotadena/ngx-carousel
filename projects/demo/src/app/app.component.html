@@ -202,12 +202,10 @@
           </section>
         </mat-expansion-panel>
       </mat-accordion>
-      <div>
-        {{ slidesList | json }}
-      </div>
       <div class="demo-carousel" [style.height]="parentHeight">
         <ngx-image-slider
           #NgxImageSlider
+          proportion="50"
           [timings]="timings"
           [autoplay]="autoplay"
           [interval]="interval"
