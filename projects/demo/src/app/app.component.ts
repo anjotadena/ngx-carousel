@@ -24,12 +24,18 @@ export class AppComponent {
   public loop = true;
   public hideArrows = false;
   public hideIndicators = false;
-  public color: ThemePalette = 'accent';
+  public color: ThemePalette = undefined;
   public maxWidth = 'auto';
   public maintainAspectRatio = true;
   public proportion = 25;
   public slideHeight = '200px';
-  public slides = this.slidesList.length;
+  public slides = [
+    "https://i0.wp.com/sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png?ssl=1&i=1",
+    "https://i0.wp.com/sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png?ssl=1&i=2",
+    "https://i0.wp.com/sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png?ssl=1&i=3",
+    "https://i0.wp.com/sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png?ssl=1&i=4",
+    "https://i0.wp.com/sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png?ssl=1&i=5"
+  ];
   public overlayColor = '#00000040';
   public hideOverlay = false;
   public useKeyboard = true;
@@ -47,7 +53,7 @@ export class AppComponent {
     color="${this.color}"
     maxWidth="${this.maxWidth}"
     proportion="${this.proportion}"
-    slides="${this.slides}"
+    slides="${this.slides.length}"
     [loop]="${this.loop}"
     [hideArrows]="${this.hideArrows}"
     [hideIndicators]="${this.hideIndicators}"

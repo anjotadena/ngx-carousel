@@ -1,262 +1,286 @@
-<mat-toolbar>
-  <span>ngx-image-slider</span>
-
-  <span class="demo-spacer"></span>
-
-  <span>
-    <button
-      class="demo-code"
-      mat-button
-      matTooltip="Copy to clipboard"
-      matTooltipPosition="before"
-      aria-label="Button for copying installation command to clipboard"
-      (click)="copy()"
-    >
-      <mat-icon>assignment</mat-icon>
-      npm install ngx-image-slider
-    </button>
-  </span>
-
-  <span class="demo-source">
-    <button mat-button [matMenuTriggerFor]="demoMenu">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #demoMenu="matMenu">
-      <a
-        href="https://github.com/anjotadena/ngx-image-slider"
-        target="_blank"
-        mat-menu-item
-      >
-        <mat-icon>code</mat-icon>Source code
-      </a>
-      <button mat-menu-item (click)="toggleTheme()">
-        <mat-icon>
-          {{ darkMode ? "invert_colors_off" : "invert_colors" }}
-        </mat-icon>
-        Toggle theme
-      </button>
-    </mat-menu>
-  </span>
+<mat-toolbar color="primary">
+  <span>Ngx Image Slider</span>
 </mat-toolbar>
-
-<div class="demo-container mat-app-background">
-  <mat-card>
-    <mat-card-content>
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Parent Configuration </mat-panel-title>
-          </mat-expansion-panel-header>
-          <section class="demo-section">
-            <label class="demo-margin">Size:</label>
-            <mat-form-field class="demo-margin">
-              <mat-select placeholder="Parent Height" [(value)]="parentHeight">
-                <mat-option [value]="'auto'">Auto</mat-option>
-                <mat-option [value]="'500px'">500px</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </section>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Image Slider configuration </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <section class="demo-section">
-            <label class="demo-margin">Animations:</label>
-            <mat-form-field class="demo-margin">
-              <input matInput placeholder="Timings" [(ngModel)]="timings" />
-            </mat-form-field>
-            <mat-checkbox class="demo-margin" [(ngModel)]="autoplay"
-              >Autoplay</mat-checkbox
+<div
+  style="
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 1em;
+  "
+>
+  <div style="width: 30%">
+    <mat-accordion multi displayMode="flat">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Installation </mat-panel-title>
+        </mat-expansion-panel-header>
+        <section
+          class="demo-section"
+          style="
+            padding: 1em;
+            background: #f3f3f3;
+            border-left: 5px solid #e3e3e3;
+          "
+        >
+          <span>
+            <button
+              class="demo-code"
+              mat-button
+              matTooltip="Copy to clipboard"
+              matTooltipPosition="before"
+              aria-label="Button for copying installation command to clipboard"
+              (click)="copy()"
             >
-            <mat-form-field class="demo-margin">
-              <input
-                matInput
-                type="number"
-                min="1"
-                placeholder="Interval"
-                [(ngModel)]="interval"
-              />
-            </mat-form-field>
-          </section>
+              <mat-icon>assignment</mat-icon>
+              npm install ngx-image-slider
+            </button>
+          </span>
+        </section>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Parent Configuration </mat-panel-title>
+        </mat-expansion-panel-header>
+        <section class="demo-section" style="padding: 1em">
+          <mat-form-field appearance="outline">
+            <mat-label>Size</mat-label>
+            <mat-select
+              placeholder="Parent Height"
+              [(value)]="parentHeight"
+              appearance="outline"
+            >
+              <mat-option [value]="'auto'">Auto</mat-option>
+              <mat-option [value]="'500px'">500px</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Image Slider configuration </mat-panel-title>
+        </mat-expansion-panel-header>
 
-          <section class="demo-section">
-            <label class="demo-margin">Appearance:</label>
-            <mat-form-field class="demo-margin">
-              <mat-select placeholder="Color" [(value)]="color">
-                <mat-option value="primary">Primary</mat-option>
-                <mat-option value="accent">Accent</mat-option>
-                <mat-option value="warn">Warn</mat-option>
-              </mat-select>
-            </mat-form-field>
+        <section class="demo-section">
+          <mat-form-field appearance="outline">
+            <mat-label>Animations</mat-label>
+            <input matInput placeholder="Timings" [(ngModel)]="timings" />
+          </mat-form-field>
+          <div>
+            <mat-checkbox [(ngModel)]="autoplay">Autoplay</mat-checkbox>
+          </div>
+          <mat-form-field class="demo-margin">
+            <mat-label>Interval</mat-label>
+            <input
+              matInput
+              type="number"
+              min="1"
+              placeholder="Interval"
+              [(ngModel)]="interval"
+            />
+          </mat-form-field>
 
-            <mat-form-field class="demo-margin">
-              <input
-                matInput
-                placeholder="Maximum width"
-                [(ngModel)]="maxWidth"
-              />
-            </mat-form-field>
+          <mat-form-field class="demo-margin">
+            <mat-label>Appearance</mat-label>
+            <mat-select placeholder="Color" [(value)]="color">
+              <mat-option value="primary">Primary</mat-option>
+              <mat-option value="accent">Accent</mat-option>
+              <mat-option value="warn">Warn</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-            <mat-form-field class="demo-margin">
-              <input
-                matInput
-                type="number"
-                placeholder="Slides"
-                [(ngModel)]="slides"
-              />
-            </mat-form-field>
-          </section>
+          <mat-form-field class="demo-margin">
+            <mat-label>Maximum width</mat-label>
+            <input
+              matInput
+              placeholder="Maximum width"
+              [(ngModel)]="maxWidth"
+            />
+          </mat-form-field>
 
-          <section class="demo-section">
-            <label class="demo-margin">Size:</label>
-            <mat-form-field class="demo-margin">
-              <mat-select
-                placeholder="Maintain Aspect Ratio"
-                [(value)]="maintainAspectRatio"
-              >
-                <mat-option [value]="true">True</mat-option>
-                <mat-option [value]="false">False</mat-option>
-              </mat-select>
-            </mat-form-field>
+          <mat-form-field class="demo-margin">
+            <mat-label>Slides</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Slides"
+              [(ngModel)]="slides"
+            />
+          </mat-form-field>
 
-            <mat-form-field class="demo-margin">
-              <input
-                matInput
-                type="number"
-                min="1"
-                placeholder="Proportion"
-                [(ngModel)]="proportion"
-              />
-            </mat-form-field>
+          <mat-form-field class="demo-margin">
+            <mat-label>Aspect Ratio</mat-label>
+            <mat-select
+              placeholder="Maintain Aspect Ratio"
+              [(value)]="maintainAspectRatio"
+            >
+              <mat-option [value]="true">True</mat-option>
+              <mat-option [value]="false">False</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-            <mat-form-field class="demo-margin">
-              <input
-                matInput
-                type="text"
-                placeholder="Slide Height"
-                [(ngModel)]="slideHeight"
-              />
-            </mat-form-field>
-          </section>
+          <mat-form-field class="demo-margin">
+            <mat-label>Proportion</mat-label>
+            <input
+              matInput
+              type="number"
+              min="1"
+              placeholder="Proportion"
+              [(ngModel)]="proportion"
+            />
+          </mat-form-field>
 
-          <section class="demo-section">
-            <label class="demo-margin">Navigation:</label>
+          <mat-form-field class="demo-margin">
+            <mat-label>Slide Height</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Slide Height"
+              [(ngModel)]="slideHeight"
+            />
+          </mat-form-field>
+
+          <div>
+            <h4>Navigation</h4>
+          </div>
+          <div>
             <mat-checkbox class="demo-margin" [(ngModel)]="loop"
               >Loop</mat-checkbox
             >
+          </div>
+          <div>
             <mat-checkbox class="demo-margin" [(ngModel)]="hideArrows"
               >Hide arrows</mat-checkbox
             >
+          </div>
+          <div>
             <mat-checkbox class="demo-margin" [(ngModel)]="hideIndicators"
               >Hide indicators</mat-checkbox
             >
-          </section>
-
-          <section class="demo-section">
-            <label class="demo-margin">Accessibility:</label>
+          </div>
+          <div>
+            <h4 class="demo-margin">Accessibility</h4>
+          </div>
+          <div>
             <mat-checkbox class="demo-margin" [(ngModel)]="useKeyboard"
               >Use keyboard</mat-checkbox
             >
+          </div>
+          <div>
             <mat-checkbox class="demo-margin" [(ngModel)]="useMouseWheel"
               >Use mouse wheel</mat-checkbox
             >
-            <mat-form-field>
-              <mat-select
-                placeholder="Orientation"
-                [(value)]="orientation"
-                (selectionChange)="NgxImageSlider.slideTo(0)"
-              >
-                <mat-option value="ltr">Left to right</mat-option>
-                <mat-option value="rtl">Right to left</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </section>
-        </mat-expansion-panel>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-select
+              placeholder="Orientation"
+              [(value)]="orientation"
+              (selectionChange)="NgxImageSlider.slideTo(0)"
+            >
+              <mat-option value="ltr">Left to right</mat-option>
+              <mat-option value="rtl">Right to left</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section>
+      </mat-expansion-panel>
 
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Slide configuration </mat-panel-title>
-          </mat-expansion-panel-header>
-          <section class="demo-section">
-            <label class="demo-margin">Appearance:</label>
-            <mat-form-field class="demo-margin">
-              <input
-                matInput
-                placeholder="Overlay color"
-                [(ngModel)]="overlayColor"
-              />
-            </mat-form-field>
-
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Slide configuration </mat-panel-title>
+        </mat-expansion-panel-header>
+        <section class="demo-section">
+          <mat-form-field class="demo-margin" appearance="outline">
+            <mat-label class="demo-margin">Appearance</mat-label>
+            <input
+              matInput
+              placeholder="Overlay color"
+              [(ngModel)]="overlayColor"
+            />
+          </mat-form-field>
+          <div>
             <mat-checkbox class="demo-margin" [(ngModel)]="hideOverlay"
               >Hide overlay</mat-checkbox
             >
-          </section>
+          </div>
+        </section>
 
-          <section class="demo-section">
-            <label class="demo-margin">Custom:</label>
+        <section class="demo-section">
+          <h4 class="demo-margin">Custom</h4>
+          <div>
             <mat-checkbox class="demo-margin" [(ngModel)]="showContent">
               Show custom content
             </mat-checkbox>
-          </section>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <div class="demo-carousel" [style.height]="parentHeight">
-        <ngx-image-slider
-          #NgxImageSlider
-          proportion="50"
-          [timings]="timings"
-          [autoplay]="autoplay"
-          [interval]="interval"
-          [loop]="loop"
-          [hideArrows]="hideArrows"
-          [hideIndicators]="hideIndicators"
-          [color]="color"
-          [lazyLoad]="true"
-          [maxWidth]="maxWidth"
-          [proportion]="proportion"
-          [useKeyboard]="useKeyboard"
-          [useMouseWheel]="useMouseWheel"
-          [orientation]="orientation"
-          [slides]="slides"
-          [maintainAspectRatio]="maintainAspectRatio"
-          [slideHeight]="slideHeight"
-          (change)="onChange($event)"
-        >
-          <ngx-image-slider-item
-            #NgxImageSliderItem
-            *ngFor="let slide of slidesList; let i = index"
-            image="assets/demo.png?{{i}}"
-            [overlayColor]="overlayColor"
-            [hideOverlay]="hideOverlay"
-          >
-            <ng-container *ngIf="showContent">
-              <div
-                style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center"
-              >
-                <h1>{{ i }}</h1>
-                <p>disabled: {{ NgxImageSliderItem.disabled }}</p>
-                <button
-                  mat-flat-button
-                  (click)="
-                    NgxImageSliderItem.disabled = !NgxImageSliderItem.disabled
-                  "
-                >
-                  Click me!
-                </button>
-              </div>
-            </ng-container>
-          </ngx-image-slider-item>
-        </ngx-image-slider>
-      </div>
+          </div>
+        </section>
+      </mat-expansion-panel>
 
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>Events</mat-expansion-panel-header>
         <pre [innerText]="log.join('\n')"></pre>
       </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 
+  <div style="width: 65%">
+    <ngx-image-slider
+      #NgxImageSlider
+      proportion="50"
+      [timings]="timings"
+      [autoplay]="autoplay"
+      [interval]="interval"
+      [loop]="loop"
+      [hideArrows]="hideArrows"
+      [hideIndicators]="hideIndicators"
+      [color]="color"
+      [lazyLoad]="true"
+      [maxWidth]="maxWidth"
+      [proportion]="proportion"
+      [useKeyboard]="useKeyboard"
+      [useMouseWheel]="useMouseWheel"
+      [orientation]="orientation"
+      [slides]="slides.length"
+      [maintainAspectRatio]="maintainAspectRatio"
+      [slideHeight]="slideHeight"
+      (change)="onChange($event)"
+    >
+      <ngx-image-slider-item
+        #NgxImageSliderItem
+        *ngFor="let slide of slides; let i = index"
+        [image]="slide"
+        [overlayColor]="overlayColor"
+        [hideOverlay]="hideOverlay"
+      >
+        <ng-container *ngIf="showContent">
+          <div
+            style="
+              width: 100%;
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <h1>{{ i }}</h1>
+            <p>disabled: {{ NgxImageSliderItem.disabled }}</p>
+            <button
+              mat-flat-button
+              (click)="
+                NgxImageSliderItem.disabled = !NgxImageSliderItem.disabled
+              "
+            >
+              Click me!
+            </button>
+          </div>
+        </ng-container>
+      </ngx-image-slider-item>
+    </ngx-image-slider>
+    <div>
       <pre><code class="demo-code">{{ code }}</code></pre>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>
+
+<footer class="docs-footer" style="padding: 1em; text-align: center; border-top: 1px solid #f3f3f3">
+  <p _ngcontent-ng-c1332955465="">Made with love by the Anjo Tadena</p>
+</footer>
