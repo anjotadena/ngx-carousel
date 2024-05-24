@@ -23,6 +23,7 @@
             border-left: 5px solid #e3e3e3;
           "
         >
+          <div>Angular version 17.x.x</div>
           <span>
             <button
               class="demo-code"
@@ -37,6 +38,31 @@
             </button>
           </span>
         </section>
+
+        <section
+          class="demo-section"
+          style="
+            padding: 1em;
+            background: #f3f3f3;
+            border-left: 5px solid #e3e3e3;
+          "
+        >
+          <div>Angular version 16.x.x</div>
+          <span>
+            <button
+              class="demo-code"
+              mat-button
+              matTooltip="Copy to clipboard"
+              matTooltipPosition="before"
+              aria-label="Button for copying installation command to clipboard"
+              (click)="copy()"
+            >
+              <mat-icon>assignment</mat-icon>
+              npm install ngx-image-slider@1.0.0
+            </button>
+          </span>
+        </section>
+
       </mat-expansion-panel>
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>

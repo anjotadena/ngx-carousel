@@ -15,9 +15,13 @@ This project is a fork and continuation of the now-discontinued [`@ngmodule/mate
 ## Installation
 
 Install the package using npm:
-
+Angular version 17.x.x
 ```bash
 npm install --save ngx-image-slider
+```
+Angular version 16.x.x
+```bash
+npm install --save ngx-image-slider@1.0.0
 ```
 
 ### Importing the Module
