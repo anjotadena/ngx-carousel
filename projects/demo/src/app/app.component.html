@@ -58,7 +58,7 @@
               (click)="copy()"
             >
               <mat-icon>assignment</mat-icon>
-              npm install ngx-image-slider@1.0.0
+              {{"npm install ngx-image-slider@1.0.0"}}
             </button>
           </span>
         </section>
@@ -245,6 +245,8 @@
         <pre [innerText]="log.join('\n')"></pre>
       </mat-expansion-panel>
     </mat-accordion>
+
+
   </div>
 
   <div style="width: 65%">
@@ -255,8 +257,6 @@
       [autoplay]="autoplay"
       [interval]="interval"
       [loop]="loop"
-      [hideArrows]="hideArrows"
-      [hideIndicators]="hideIndicators"
       [color]="color"
       [lazyLoad]="true"
       [maxWidth]="maxWidth"

@@ -1,36 +1,6 @@
-<div
-  #imageSliderContainer
-  class="image-slider"
-  tabindex="0"
-  [style.max-width]="maxWidth"
-  [style.height]="!maintainAspectRatio ? '100%' : 'auto'"
->
-  <ul
-    #imageSliderList
-    class="image-slider-list"
-    role="listbox"
-    [attr.aria-label]="ariaLabel"
-    [style.flex-direction]="orientation === 'rtl' ? 'row-reverse' : 'row'"
-    [style.height]="!maintainAspectRatio ? '100%' : 'auto'"
-  >
-    <li
-      #imageSliderSlide
-      *ngFor="let slide of slidesList"
-      class="image-slider-slide"
-      role="option"
-      [style.padding-bottom]="maintainAspectRatio && proportion ? proportion + '%': '0px'"
-      [style.height]="!maintainAspectRatio && slideHeight ? slideHeight : '0px'"
-      (panleft)="onPan($event, imageSliderSlide)"
-      (panright)="onPan($event, imageSliderSlide)"
-      (panend)="onPanEnd($event, imageSliderSlide)"
-      (pancancel)="onPanEnd($event, imageSliderSlide)"
-    >
-      <ng-container *ngIf="slide.load" [ngTemplateOutlet]="slide.templateRef"></ng-container>
-    </li>
-  </ul>
-
+<div style="display: flex; align-items: center">
   <button
-    *ngIf="!hideArrows"
+    *ngIf="!hideArrows || slidesList.length > 1"
     mat-icon-button
     type="button"
     tabindex="-1"
@@ -38,17 +8,75 @@
     [color]="color"
     [disabled]="!loop && currentIndex == 0"
     (click)="previous()"
+    style="display: flex; align-self: center; margin: 0.5em"
   >
     <mat-icon
-      *ngIf="svgIconOverrides?.arrowBack; else: defaultArrowBack"
+      *ngIf="svgIconOverrides?.arrowBack; else defaultArrowBack"
       [svgIcon]="svgIconOverrides.arrowBack"
     ></mat-icon>
     <ng-template #defaultArrowBack>
       <mat-icon>arrow_back</mat-icon>
     </ng-template>
   </button>
+  <div
+    #imageSliderContainer
+    class="image-slider"
+    tabindex="0"
+    [style.max-width]="maxWidth"
+    [style.height]="!maintainAspectRatio ? '90%' : 'auto'"
+  >
+    <ul
+      #imageSliderList
+      class="image-slider-list"
+      role="listbox"
+      [attr.aria-label]="ariaLabel"
+      [style.flex-direction]="orientation === 'rtl' ? 'row-reverse' : 'row'"
+      [style.height]="!maintainAspectRatio ? '100%' : 'auto'"
+    >
+      <li
+        #imageSliderSlide
+        *ngFor="let slide of slidesList"
+        class="image-slider-slide"
+        role="option"
+        [style.padding-bottom]="
+          maintainAspectRatio && proportion ? proportion + '%' : '0px'
+        "
+        [style.height]="
+          !maintainAspectRatio && slideHeight ? slideHeight : '0px'
+        "
+        (panleft)="onPan($event, imageSliderSlide)"
+        (panright)="onPan($event, imageSliderSlide)"
+        (panend)="onPanEnd($event, imageSliderSlide)"
+        (pancancel)="onPanEnd($event, imageSliderSlide)"
+      >
+        <ng-container
+          *ngIf="slide.load"
+          [ngTemplateOutlet]="slide.templateRef"
+        ></ng-container>
+      </li>
+    </ul>
+
+    <div
+      *ngIf="!hideIndicators || slidesList.length > 1"
+      class="image-slider-indicators"
+      tabindex="-1"
+      [style.flex-direction]="orientation === 'rtl' ? 'row-reverse' : 'row'"
+    >
+      <button
+        *ngFor="let slide of slidesList; let i = index"
+        type="button"
+        tabindex="-1"
+        mat-mini-fab
+        [color]="color"
+        [attr.aria-label]="'Slide #' + i"
+        [disabled]="i == currentIndex"
+        (click)="slideTo(i)"
+        (focus)="imageSliderContainer.focus()"
+      ></button>
+    </div>
+  </div>
   <button
-    *ngIf="!hideArrows"
+    *ngIf="!hideArrows || slidesList.length > 1"
     mat-icon-button
     type="button"
     tabindex="-1"
@@ -56,32 +84,14 @@
     [color]="color"
     [disabled]="!loop && currentIndex == slidesList.length - 1"
     (click)="next()"
+    style="display: flex; align-self: center; margin: 0.5em"
   >
     <mat-icon
-      *ngIf="svgIconOverrides?.arrowForward; else: defaultArrowForward"
+      *ngIf="svgIconOverrides?.arrowForward; else defaultArrowForward"
       [svgIcon]="svgIconOverrides.arrowForward"
     ></mat-icon>
     <ng-template #defaultArrowForward>
       <mat-icon>arrow_forward</mat-icon>
     </ng-template>
   </button>
-
-  <div
-    *ngIf="!hideIndicators"
-    class="image-slider-indicators"
-    tabindex="-1"
-    [style.flex-direction]="orientation === 'rtl' ? 'row-reverse' : 'row'"
-  >
-    <button
-      *ngFor="let slide of slidesList; let i = index"
-      type="button"
-      tabindex="-1"
-      mat-mini-fab
-      [color]="color"
-      [attr.aria-label]="'Slide #' + i"
-      [disabled]="i == currentIndex"
-      (click)="slideTo(i)"
-      (focus)="imageSliderContainer.focus()"
-    ></button>
-  </div>
 </div>
